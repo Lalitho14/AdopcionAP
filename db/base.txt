@@ -1,0 +1,47 @@
+drop database if exists Veterinaria;
+create database Veterinaria;
+
+use Veterinaria;
+
+drop table if exists Mascota;
+create table Mascota(
+  id_Mascota int not null auto_increment primary key,
+  nombre varchar(64) not null,
+  tipo enum('perro','gato', 'ave') not null,
+  descripcion varchar(120) not null,
+  adoptado boolean default false,
+  imagen varchar(120)
+);
+
+drop table if exists Duenio;
+create table Duenio(
+  id_Duenio int not null auto_increment primary key,
+  nombre varchar(64) not null
+);
+
+drop table if exists Adopcion;
+create table Adopcion(
+  id_Adopcion int not null auto_increment primary key,
+  fecha datetime default current_timestamp,
+  id_Mascota int not null,
+  id_Duenio int not null,
+  foreign key(id_Mascota) references Mascota(id_Mascota) on delete cascade on update cascade,
+  foreign key(id_Duenio) references Duenio(id_Duenio) on delete cascade on update cascade
+);
+
+insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Angry bird Rojo', 'ave', 'Es el angry bird rojo, todos los conocen pues es el mas fachero de los angry birds y es rojo.', 0, 'ave01.png');
+insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Angry bird verde', 'ave', 'Es el angry bird verde, no esta tan fachero y siempre esta enojado.', 0, 'ave02.png');
+insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Blu', 'ave', 'Aparecio en la pelicula de Rio y Rio 2 no se que decir se ve fachero pero no lo conozco.', 0, 'ave03.jpg');
+
+insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Milo', 'gato', 'Es un michi con gorro, amarillo y se ve re tierno.', 0, 'gato01.jpg');
+insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Pillo', 'gato', 'Es todo un pillo, tiene carito de no hice nada pero en realidad es lo contrario.', 0, 'gato02.jpg');
+insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Charlie', 'gato', 'Recien salido de la penitenciaria de gatos por delitos menores (se comio mi atun).', 0, 'gato03.jpeg');
+insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Botas', 'gato', 'Botas es un gato lindo pero siempre esta triste, es fan de McDonalds y siempre usa un disfraz de caja feliz.', 0, 'gato04.png');
+
+insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Golfo', 'perro', 'Es un perro tierno pero tiene carita de perdido pero es porque se pierde en su mirada.', 0, 'perro01.png');
+insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Leo', 'perro', 'Es un perrillo reformado acaba de salir de un juicio por asesinato agraviado (Mordio mi peluche).', 0, 'perro02.jpeg');
+insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Rocky', 'perro', 'Es todo un perro fachero, usa palabras elegantes como Guau Guau, siempre viste de gala.', 0, 'perro03.jpg');
+insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Mickey', 'perro', 'Dice que si no lo adoptas, es tierno y siempre esta triste.', 0, 'perro04.jpg');
+
+
+
