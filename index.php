@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -48,7 +48,7 @@
                   <h3><?php echo $mascota->GetTipo() ?></h3>
                 </div>
                 <div class="row">
-                  <a href="./adoptar.php?id_mascota=<?php echo $mascota->GetId() ?>" class="btn btn-success">Adoptar</a>
+                  <a href="./VerMas.php?id_mascota=<?php echo $mascota->GetId() ?>" class="btn btn-success">Ver mas</a>
                 </div>
               </div>
             </div>

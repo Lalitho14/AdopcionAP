@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -23,7 +23,7 @@
       $res = mysqli_fetch_array($consulta);
       $mascota = new Mascota($res['id_Mascota'], $res['nombre'], $res['tipo'], $res['descripcion'], $res['adoptado'], $res['imagen']);
       ?>
-      <h1>Adopta a <?php echo $mascota->GetNombre() ?></h1>
+      <h1 id="home">Adopta a <?php echo $mascota->GetNombre() ?></h1>
       <div class="container text-center">
         <div class="row align-items-center"">
           <div class=" col-5">
@@ -35,17 +35,6 @@
           </div>
           <div class="row">
             <p class="text-start"><?php echo $mascota->GetDescripcion() ?></p>
-          </div>
-          <div class="row">
-            <form action="./completado.php?id_mascota=<?php echo $mascota->GetId() ?>" method="post" class="text-start">
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Ingrese su nombre">
-              </div>
-              <div class="mb-3 text-center">
-                <button type="submit" class="btn btn-success">Adoptar</button>
-              </div>
-            </form>
           </div>
         </div>
       </div>

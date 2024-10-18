@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -12,44 +12,82 @@
 <body>
   <main class="container">
     <div class="principal">
-      <?php include("./templates/menu.php"); ?>
-      <h1>Padrinos</h1>
-
       <?php
-      require_once("./models/Mascota.php");
-      require_once("./models/Duenio.php");
+      include("./templates/menu.php");
       $link = mysqli_connect("localhost", "root", "");
       mysqli_select_db($link, "Veterinaria");
-      $m = mysqli_query($link, "select * from Mascota where adoptado=1");
-      
-      while ($res = mysqli_fetch_array($m)) {
-        $mascota = new Mascota($res['id_Mascota'], $res['nombre'], $res['tipo'], $res['descripcion'], $res['adoptado'], $res['imagen']);
-        $consulta = mysqli_query($link, "select * from Adopcion where id_Mascota=".$mascota->GetId()."");
-        $r = mysqli_fetch_array($consulta);
-
-        $consulta = mysqli_query($link, "select nombre from Duenio where id_Duenio=".$r['id_Duenio']."");
-        $r = mysqli_fetch_array($consulta);
-        
-        $nombre = $r['nombre'];
-
       ?>
-        <div class="row align-items-center m-3 p-3">
-          <div class="col-3">
-            <div class="row">
-              <img src="./img/<?php echo $mascota->GetRutaImagen() ?>" alt="">
+      <h1 class="m-3">Padrinos</h1>
+
+      <div class="container text-center mt-3 mb-3">
+        <div class="row">
+          <form action="./padrinos.php" method="post">
+            <div class="row mb-3">
+              <div class="col">
+                <label for="duenio" class="mb-3">Selecciona usuario</label>
+                <select name="duenio" class="form-select">
+                  <?php
+                  $consulta = mysqli_query($link, "SELECT * FROM Duenio");
+                  while ($res = mysqli_fetch_array($consulta)) {
+                    echo '<option value="' . $res['id_Duenio'] . '">' . $res['nombre'] . '</option>';
+                  }
+                  ?>
+                </select>
+              </div>
             </div>
             <div class="row">
-              <h2><?php echo $mascota->GetNombre() ?></h2>
+              <div class="col">
+                <button class="btn btn-success">Mostrar Adopciones</button>
+              </div>
             </div>
-          </div>
-          <div class="col">
-            <h3>Fue adoptado por <?php echo $nombre ?></h3>
-          </div>
+          </form>
         </div>
+      </div>
       <?php
+      if (isset($_POST['duenio'])) {
+        $m = mysqli_query($link, "select * from Adopcion where id_Duenio = " . $_POST['duenio']);
+        if (mysqli_num_rows($m) > 0) {
+          while ($res = mysqli_fetch_array($m)) {
+            $consulta_mascota = mysqli_query($link, "SELECT * FROM Mascota WHERE id_Mascota = " . $res['id_Mascota']);
+            $mascota = mysqli_fetch_assoc($consulta_mascota);
+            $consulta_duenio = mysqli_query($link, "SELECT nombre FROM Duenio WHERE id_Duenio = " . $res['id_Duenio']);
+            $nombre_duenio = mysqli_fetch_assoc($consulta_duenio);
+      ?>    
+            <div class="container text-center">
+              <div class="row align-items-center m-3 p-3">
+                <div class="col-3">
+                  <div class="row">
+                    <?php echo '<img src="./img/' . $mascota['imagen'] . '" alt="' . $mascota['nombre'] . '">'; ?>
+                  </div>
+                  <div class="row">
+                    <?php echo '<h2>' . $mascota['nombre'] . '</h2>'; ?>
+                  </div>
+                </div>
+                <div class="col">
+                  <?php 
+                  echo '<h3>Fue adoptado por ' . $nombre_duenio['nombre'] . '</h3>'; 
+                  echo '<p>'.$res['fecha'].'</p>';
+                  ?>
+                </div>
+              </div>
+            </div>
+          <?php
+          }
+        } else {
+          ?>
+          <div class="container text-center">
+            <div class="row mb-3">
+              <div class="alert alert-danger" role="alert">
+                No ha realizado ninguna adopcion.
+              </div>
+            </div>
+          </div>
+        <?php
+        }
       }
       ?>
     </div>
+    <?php mysqli_close($link); ?>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
