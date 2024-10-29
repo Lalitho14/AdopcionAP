@@ -43,5 +43,11 @@ insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Leo', '
 insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Rocky', 'perro', 'Es todo un perro fachero, usa palabras elegantes como Guau Guau, siempre viste de gala.', 0, 'perro03.jpg');
 insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Mickey', 'perro', 'Dice que si no lo adoptas, es tierno y siempre esta triste.', 0, 'perro04.jpg');
 
+insert into Duenio(nombre) values('Eduardo');
+insert into Duenio(nombre) values('Hugo');
+insert into Duenio(nombre) values('Marlem');
+insert into Duenio(nombre) values('Miryam');
+
+
 
 
