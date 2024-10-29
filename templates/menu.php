@@ -12,9 +12,6 @@
         <li class="nav-item">
           <a class="nav-link active" href="./padrinos.php">Padrinos</a>
         </li>
-        <li class="nav-item">
-          <a href="./adopciones.php" class="nav-link active">Adopciones</a>
-        </li>
       </ul>
     </div>
   </div>

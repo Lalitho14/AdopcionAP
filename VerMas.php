@@ -38,6 +38,38 @@
           </div>
         </div>
       </div>
+
+      <div class="container text-center mt-3 mb-3">
+        <div class="row">
+          <form action="./adopciones.php" method="post">
+            <div class="row mb-3">
+              <div class="row">
+                <label for="duenio" class="mb-3">Selecciona usuario</label>
+                <select name="duenio" class="form-select">
+                  <?php
+                  $consulta = mysqli_query($link, "SELECT * FROM Duenio");
+                  while ($res = mysqli_fetch_array($consulta)) {
+                    echo '<option value="' . $res['id_Duenio'] . '">' . $res['nombre'] . '</option>';
+                  }
+                  ?>
+                </select>
+              </div>
+              <div class="col">
+                <select name="mascota" class="form-select" hidden>
+                  <?php
+                  echo '<option value="' . $mascota->GetId() . '">' . $mascota->GetNombre() . '</option>';
+                  ?>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <button class="btn btn-success">Adoptar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
     </div>
   </main>

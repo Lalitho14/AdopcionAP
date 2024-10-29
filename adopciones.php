@@ -18,42 +18,6 @@
       mysqli_select_db($link, "Veterinaria");
       ?>
       <h1 class="m-3">Realizar Adopciones</h1>
-      <div class="container text-center mt-3 mb-3">
-        <div class="row">
-          <form action="./adopciones.php" method="post">
-            <div class="row mb-3">
-              <div class="col">
-                <label for="duenio" class="mb-3">Selecciona usuario</label>
-                <select name="duenio" class="form-select">
-                  <?php
-                  $consulta = mysqli_query($link, "SELECT * FROM Duenio");
-                  while ($res = mysqli_fetch_array($consulta)) {
-                    echo '<option value="' . $res['id_Duenio'] . '">' . $res['nombre'] . '</option>';
-                  }
-                  ?>
-                </select>
-              </div>
-              <div class="col">
-                <label for="mascota" class="mb-3">Selecciona mascota para adoptar</label>
-                <select name="mascota" class="form-select">
-                  <?php
-                  $consulta = mysqli_query($link, "SELECT id_Mascota, nombre FROM Mascota");
-                  while ($res = mysqli_fetch_array($consulta)) {
-                    echo '<option value="' . $res['id_Mascota'] . '">' . $res['nombre'] . '</option>';
-                  }
-                  ?>
-                </select>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <button class="btn btn-success">Adoptar</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-
       <?php
       if (isset($_POST['duenio']) && isset($_POST['mascota'])) {
       ?>
@@ -68,6 +32,13 @@
         mysqli_query($link, 'INSERT INTO Adopcion(id_Mascota,id_Duenio) VALUES(' . $_POST['mascota'] . ', ' . $_POST['duenio'] . ')');
       }
       ?>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <a class="btn btn-danger" href="./index.php">Regresar</a>
+          </div>
+        </div>
+      </div>
     </div>
     <?php mysqli_close($link); ?>
   </main>

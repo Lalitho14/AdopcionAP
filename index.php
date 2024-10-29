@@ -26,8 +26,6 @@
         while ($res = mysqli_fetch_array($consulta)) {
           $mascotas[] = new Mascota($res['id_Mascota'], $res['nombre'], $res['tipo'], $res['descripcion'], $res['adoptado'], $res['imagen']);
         }
-        mysqli_close($link);
-
         foreach ($mascotas as $mascota) {
           if (!$mascota->GetAdoptado()) {
         ?>
@@ -55,6 +53,7 @@
         <?php
           }
         }
+        mysqli_close($link);
         ?>
       </div>
     </div>
