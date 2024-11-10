@@ -5,15 +5,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
   <title>Veterinaria</title>
 </head>
 
 <body>
+  <?php 
+  session_start();
+  if(isset($_SESSION['k_username']) & $_SESSION['k_tipo'] == 0);
+  else header("Location: ../index.php");
+  ?>
   <main class="container">
     <div class="principal">
-      <?php include("./templates/menu.php") ?>
-      <h1 class="m-4">Veterinaria S.A. de C.V.</h1>
+      <?php include("../templates/menuAdmin.php") ?>
+      <h1 class="m-4">Bienvenido <?php echo $_SESSION['k_username'] ?> a Veterinaria S.A. de C.V.</h1>
       <hr>
       <div class="container">
         <div class="row justify-content-center">

@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/style.css">
   <title>Veterinaria</title>
@@ -13,13 +14,14 @@
   <main class="container">
     <div class="principal">
       <?php include("./templates/menu.php") ?>
-      <h1 class="m-4">Veterinaria S.A. de C.V.</h1>
+      <h1 class="m-4">Contacto</h1>
       <hr>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-8 p-3 m-2">
             <div class="row text-start">
-              <p>Ayudanos a encontrar hogar para estas dulces mascotas, con tu ayuda podemos mantener a estas criaturas sanas y salvas.</p>
+              <p>Elaborado por : Jesus Eduardo Hernandez Bravo</p>
+              <p><i class="bi bi-envelope-fill"></i> Correo : jesus.hernandezb@alumno.buap.mx</p>
               <p>Gracias por tu visita. Vuelva pronto.</p>
             </div>
           </div>

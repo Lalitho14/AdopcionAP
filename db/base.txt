@@ -16,7 +16,10 @@ create table Mascota(
 drop table if exists Duenio;
 create table Duenio(
   id_Duenio int not null auto_increment primary key,
-  nombre varchar(64) not null
+  nombre varchar(64) not null,
+  username varchar(64) not null,
+  password varchar(40) not null,
+  tipo int(1) not null default 1
 );
 
 drop table if exists Adopcion;
@@ -43,10 +46,11 @@ insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Leo', '
 insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Rocky', 'perro', 'Es todo un perro fachero, usa palabras elegantes como Guau Guau, siempre viste de gala.', 0, 'perro03.jpg');
 insert into Mascota(nombre, tipo, descripcion, adoptado, imagen) values('Mickey', 'perro', 'Dice que si no lo adoptas, es tierno y siempre esta triste.', 0, 'perro04.jpg');
 
-insert into Duenio(nombre) values('Eduardo');
-insert into Duenio(nombre) values('Hugo');
-insert into Duenio(nombre) values('Marlem');
-insert into Duenio(nombre) values('Miryam');
+insert into Duenio(nombre, username, password) values('Eduardo', 'Lalitho', '123');
+insert into Duenio(nombre, username, password) values('Hugo', 'Hugo', '111');
+insert into Duenio(nombre, username, password) values('Marlem', 'Marlem', '222');
+insert into Duenio(nombre, username, password) values('Miryam', 'Miryam', '333');
+insert into Duenio(nombre, username, password, tipo) values('Admin', 'ADM', 'root', 0);
 
 
 
