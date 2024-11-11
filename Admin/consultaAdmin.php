@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/style.css">
   <title>Veterinaria</title>
@@ -50,8 +51,18 @@
                 <div class="row">
                   <h3><?php echo $mascota->GetTipo() ?></h3>
                 </div>
-                <div class="row">
-                  <a href="./VerMas.php?id_mascota=<?php echo $mascota->GetId() ?>" class="btn btn-success">Ver mas</a>
+              </div>
+              <div class="col">
+                <div class="row justify-content-center">
+                  <div class="col">
+                    <a href="./VerMas.php?id_mascota=<?php echo $mascota->GetId() ?>" class="btn btn-success"><i class="bi bi-pencil-square"></i> Editar</a>
+                  </div>
+                  <div class="col">
+                    <form action="./eliminar.php" method="post">
+                      <input type="text" name="id_mascota" hidden value="<?php echo $mascota->GetId() ?>">
+                      <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Eliminar</button>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
