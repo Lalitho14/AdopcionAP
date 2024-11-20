@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Adopciones SYSTEM "./adopciones.dtd">
+<?xml-stylesheet type="text/xsl" href="./Veterinaria.xsl"?>
+<Adopciones>
+  <Adopcion>
+    <id>4</id>
+    <fecha>2024-11-19 22:58:10</fecha>
+    <mascota>
+      <id_Mascota>3</id_Mascota>
+      <nombre>Blu</nombre>
+      <tipo>ave</tipo>
+      <descripcion>Aparecio en la pelicula de Rio y Rio 2 no se que decir se ve fachero pero no lo conozco.</descripcion>
+      <adoptado>0</adoptado>
+      <imagen>ave03.jpg</imagen>
+    </mascota>
+    <duenio>
+      <id_Duenio>2</id_Duenio>
+      <nombre>Hugo</nombre>
+      <username>Hugo</username>
+      <tipo>1</tipo>
+    </duenio>
+  </Adopcion>
+</Adopciones>

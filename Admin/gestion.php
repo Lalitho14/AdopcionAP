@@ -19,6 +19,7 @@
     <div class="principal">
       <?php
       include("../templates/menuAdmin.php");
+      include './VerAdopciones.php';
       $link = mysqli_connect("localhost", "root", "");
       mysqli_select_db($link, "Veterinaria");
       ?>
@@ -31,8 +32,9 @@
               <div class="col">
                 <label for="duenio" class="mb-3">Selecciona usuario</label>
                 <select name="duenio" class="form-select">
+                  <option value="0" selected>Todos</option>
                   <?php
-                  $consulta = mysqli_query($link, "SELECT * FROM Duenio");
+                  $consulta = mysqli_query($link, "SELECT * FROM Duenio WHERE tipo!=0");
                   while ($res = mysqli_fetch_array($consulta)) {
                     echo '<option value="' . $res['id_Duenio'] . '">' . $res['nombre'] . '</option>';
                   }
@@ -42,7 +44,7 @@
             </div>
             <div class="row">
               <div class="col">
-                <button class="btn btn-success">Mostrar Adopciones</button>
+                <button class="btn btn-primary">Mostrar Adopciones</button>
               </div>
             </div>
           </form>
@@ -50,40 +52,51 @@
       </div>
       <?php
       if (isset($_POST['duenio'])) {
-        $m = mysqli_query($link, "select * from Adopcion where id_Duenio = " . $_POST['duenio']);
-        if (mysqli_num_rows($m) > 0) {
-          while ($res = mysqli_fetch_array($m)) {
-            $consulta_mascota = mysqli_query($link, "SELECT * FROM Mascota WHERE id_Mascota = " . $res['id_Mascota']);
-            $mascota = mysqli_fetch_assoc($consulta_mascota);
-            $consulta_duenio = mysqli_query($link, "SELECT nombre FROM Duenio WHERE id_Duenio = " . $res['id_Duenio']);
-            $nombre_duenio = mysqli_fetch_assoc($consulta_duenio);
+        if ($_POST['duenio'] == 0) {
+          $sql = "SELECT * FROM Adopcion INNER JOIN Mascota ON Adopcion.id_Mascota=Mascota.id_Mascota INNER JOIN Duenio ON Adopcion.id_Duenio=Duenio.id_Duenio";
+        } else {
+          $sql = "SELECT * FROM Adopcion INNER JOIN Mascota ON Adopcion.id_Mascota=Mascota.id_Mascota INNER JOIN Duenio ON Adopcion.id_Duenio=Duenio.id_Duenio AND Duenio.id_Duenio = " . $_POST['duenio'];
+        }
+        GenerarXML($sql, $link);
+        $xml = simplexml_load_file("adopciones.xml");
+        if (count($xml->Adopcion) > 0) {
+          foreach ($xml->Adopcion as $adopcion) {
       ?>
             <div class="container text-center">
               <div class="row align-items-center m-3 p-3">
                 <div class="col-3">
                   <div class="row">
-                    <?php echo '<img src="../img/' . $mascota['imagen'] . '" alt="' . $mascota['nombre'] . '">'; ?>
+                    <?php echo '<img src="../img/' . $adopcion->mascota->imagen . '" alt="' . $adopcion->mascota->nombre . '">'; ?>
                   </div>
                   <div class="row">
-                    <?php echo '<h2>' . $mascota['nombre'] . '</h2>'; ?>
+                    <?php echo '<h2>' . $adopcion->mascota->nombre . '</h2>'; ?>
                   </div>
                 </div>
                 <div class="col">
                   <?php
-                  echo '<h3>Fue adoptado por ' . $nombre_duenio['nombre'] . '</h3>';
-                  echo '<p>' . $res['fecha'] . '</p>';
+                  echo '<h3>Fue adoptado por ' . $adopcion->duenio->nombre . '</h3>';
+                  echo '<p>' . $adopcion->fecha . '</p>';
                   ?>
                 </div>
               </div>
             </div>
           <?php
           }
-        } else {
           ?>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <button class="btn btn-success" onclick="GuardarPDF()">Imprimir</button>
+              </div>
+            </div>
+          </div>
+        <?php
+        } else {
+        ?>
           <div class="container text-center">
             <div class="row mb-3">
               <div class="alert alert-danger" role="alert">
-                No ha realizado ninguna adopcion.
+                No se ha realizado ninguna adopcion.
               </div>
             </div>
           </div>
@@ -96,6 +109,8 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="./index.js"></script>
 </body>
 
 </html>

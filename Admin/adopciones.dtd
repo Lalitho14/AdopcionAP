@@ -1,0 +1,14 @@
+<!ELEMENT Adopciones (Adopcion*)>
+<!ELEMENT Adopcion (id, fecha, mascota, duenio)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT fecha (#PCDATA)>
+<!ELEMENT mascota (id_Mascota, nombre, tipo, descripcion, adoptado, imagen)>
+<!ELEMENT id_Mascota (#PCDATA)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT tipo (#PCDATA)>
+<!ELEMENT descripcion (#PCDATA)>
+<!ELEMENT adoptado (#PCDATA)>
+<!ELEMENT imagen (#PCDATA)>
+<!ELEMENT duenio (id_Duenio, nombre, username, tipo)>
+<!ELEMENT id_Duenio (#PCDATA)>
+<!ELEMENT username (#PCDATA)>
